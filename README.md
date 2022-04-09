@@ -13,7 +13,7 @@
     * Run project
    ```
    cd wizeline-demoapp
-   ./mvnw spring-boot:run 
+   mvnw spring-boot:run 
     ```
 4. Test project
    * Endpoint hello world: http://localhost:8081/hello
