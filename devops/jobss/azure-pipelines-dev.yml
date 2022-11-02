@@ -4,20 +4,36 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+- none
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
+
+- task: PowerShell@2
+  displayName: Get version pom.xml
   inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    targetType: 'inline'
+    script: |
+     [xml]$pomXml = Get-Content .\pom.xml
+     # version
+     Write-Host $pomXml.project.version
+     $version=$pomXml.project.version
+     $appName=$pomXml.project.artifactId + $version
+     Write-Host $version
+     Write-Host $appName
+     Write-Host "##vso[task.setvariable variable=version]$version"
+    workingDirectory: '$(Build.SourcesDirectory)'
+
+# - task: Maven@3
+#   inputs:
+#     mavenPomFile: 'pom.xml'
+#     publishJUnitResults: false
+#     javaHomeOption: 'JDKVersion'
+#     jdkVersionOption: '1.11'
+#     mavenVersionOption: 'Default'
+#     mavenOptions: '-Xmx3072m'
+#     mavenAuthenticateFeed: false
+#     effectivePomSkip: false
+#     sonarQubeRunAnalysis: false
