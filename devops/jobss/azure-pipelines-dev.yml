@@ -19,7 +19,7 @@ steps:
     targetType: 'inline'
     script: |
      [xml]$pomXml = Get-Content .\pom.xml
-     # version
+     # vars
      $version=$pomXml.project.version
      $artifactId=$pomXml.project.artifactId
      $appName=$artifactId + "-v"+$version.Split(".")[0]
@@ -38,6 +38,7 @@ steps:
     goals: 'clean package'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    allowBrokenSymlinks: false
     codeCoverageToolOption: 'JaCoCo'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
