@@ -12,7 +12,7 @@ pool:
 steps:
 
 - task: PowerShell@2
-  displayName: Get version pom.xml
+  displayName: Get vars  pom.xml
   inputs:
     targetType: 'inline'
     script: |
