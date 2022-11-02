@@ -3,6 +3,8 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+variables:
+  repositoryImage: wlopezob
 trigger:
 - none
 
@@ -49,3 +51,13 @@ steps:
   inputs:
     script: 'ls -la'
     workingDirectory: '$(Build.SourcesDirectory)/target'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerhub'
+    repository: '$(repositoryImage)/$(appName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/dockerfile'
+    tags: '$(version)'
+    addPipelineData: false
+    addBaseImageData: false
