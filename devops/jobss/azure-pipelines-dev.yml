@@ -20,7 +20,7 @@ steps:
      # version
      Write-Host $pomXml.project.version
      $version=$pomXml.project.version
-     $appName=$pomXml.project.artifactId + $version
+     $appName=$pomXml.project.artifactId + "-v-"+$version
      Write-Host $version
      Write-Host $appName
      Write-Host "##vso[task.setvariable variable=version]$version"
