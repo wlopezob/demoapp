@@ -29,14 +29,18 @@ steps:
      Write-Host "##vso[task.setvariable variable=appName]$appName"
     workingDirectory: '$(Build.SourcesDirectory)'
 
-# - task: Maven@3
-#   inputs:
-#     mavenPomFile: 'pom.xml'
-#     publishJUnitResults: false
-#     javaHomeOption: 'JDKVersion'
-#     jdkVersionOption: '1.11'
-#     mavenVersionOption: 'Default'
-#     mavenOptions: '-Xmx3072m'
-#     mavenAuthenticateFeed: false
-#     effectivePomSkip: false
-#     sonarQubeRunAnalysis: false
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean install'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    codeCoverageToolOption: 'JaCoCo'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenOptions: '-Xmx3072m'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: true
