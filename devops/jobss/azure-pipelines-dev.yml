@@ -44,3 +44,8 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
+
+- task: CmdLine@2
+  inputs:
+    script: 'ls -la'
+    workingDirectory: '$(Build.SourcesDirectory)/target'
