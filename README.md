@@ -1,4 +1,4 @@
-# Application Demo - WIZELINE
+# Application Demo
 1. Requirement:
     * Java 11 [Download](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
     * Apache maven 3.8.5 [Download](https://dlcdn.apache.org/maven/maven-3/3.8.5/source/apache-maven-3.8.5-src.zip)
