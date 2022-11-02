@@ -18,12 +18,15 @@ steps:
     script: |
      [xml]$pomXml = Get-Content .\pom.xml
      # version
-     Write-Host $pomXml.project.version
      $version=$pomXml.project.version
-     $appName=$pomXml.project.artifactId + "-v"+$version.Split(".")[0]
+     $artifactId=$pomXml.project.artifactId
+     $appName=$artifactId + "-v"+$version.Split(".")[0]
      Write-Host $version
+     Write-Host $artifactId
      Write-Host $appName
      Write-Host "##vso[task.setvariable variable=version]$version"
+     Write-Host "##vso[task.setvariable variable=artifactId]$artifactId"
+     Write-Host "##vso[task.setvariable variable=appName]$appName"
     workingDirectory: '$(Build.SourcesDirectory)'
 
 # - task: Maven@3
