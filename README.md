@@ -8,11 +8,11 @@
 3. Run Demo:
     * clone project
    ```
-   git clone https://github.com/wlopezob/wizeline-demoapp.git
+   git clone https://github.com/wlopezob/demoapp.git
     ```
     * Run project
    ```
-   cd wizeline-demoapp
+   cd demoapp
    mvnw spring-boot:run 
     ```
 4. Test project
