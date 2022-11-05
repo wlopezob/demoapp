@@ -62,18 +62,18 @@ steps:
     addBaseImageData: false
 
 
-# - task: PowerShell@2
-#   displayName: Set version and repository in files *.yaml
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content deploy.yaml
-#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{repositoryImage}}', '$(repositoryImage)' | Set-Content deploy.yaml
-#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{version}}', '$(version)' | Set-Content deploy.yaml
-#       (Get-Content service.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content service.yaml
-#       cat deploy.yaml
-#       cat service.yaml
-#     workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
+- task: PowerShell@2
+  displayName: Set version and repository in files *.yaml
+  inputs:
+    targetType: 'inline'
+    script: |
+      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content deploy.yaml
+      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{repositoryImage}}', '$(repositoryImage)' | Set-Content deploy.yaml
+      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{version}}', '$(version)' | Set-Content deploy.yaml
+      (Get-Content service.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content service.yaml
+      cat deploy.yaml
+      cat service.yaml
+    workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
 
 # - task: PublishBuildArtifacts@1
 #   displayName: 'Publish to ArtifactStagingDirectory'
