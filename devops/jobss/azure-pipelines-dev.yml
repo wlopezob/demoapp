@@ -53,7 +53,7 @@ steps:
 - task: Docker@2
   displayName: Docker Build and push
   inputs:
-    containerRegistry: 'dockerhub'
+    containerRegistry: 'acr'
     repository: '$(appName)'
     command: 'buildAndPush'
     Dockerfile: '**/dockerfile'
