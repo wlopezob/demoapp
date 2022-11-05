@@ -31,52 +31,52 @@ steps:
      Write-Host "##vso[task.setvariable variable=appName]$appName"
     workingDirectory: '$(Build.SourcesDirectory)'
 
-- task: Maven@3
-  displayName: Clean Package
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean package'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    allowBrokenSymlinks: false
-    codeCoverageToolOption: 'JaCoCo'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: true
+# - task: Maven@3
+#   displayName: Clean Package
+#   inputs:
+#     mavenPomFile: 'pom.xml'
+#     goals: 'clean package'
+#     publishJUnitResults: true
+#     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+#     allowBrokenSymlinks: false
+#     codeCoverageToolOption: 'JaCoCo'
+#     javaHomeOption: 'JDKVersion'
+#     jdkVersionOption: '1.11'
+#     mavenVersionOption: 'Default'
+#     mavenOptions: '-Xmx3072m'
+#     mavenAuthenticateFeed: false
+#     effectivePomSkip: false
+#     sonarQubeRunAnalysis: false
+#     checkStyleRunAnalysis: true
 
-- task: Docker@2
-  displayName: Docker Build and push
-  inputs:
-    containerRegistry: 'dockerhub'
-    repository: '$(repositoryImage)/$(appName)'
-    command: 'buildAndPush'
-    Dockerfile: '**/dockerfile'
-    tags: '$(version)'
-    addPipelineData: false
-    addBaseImageData: false
+# - task: Docker@2
+#   displayName: Docker Build and push
+#   inputs:
+#     containerRegistry: 'dockerhub'
+#     repository: '$(repositoryImage)/$(appName)'
+#     command: 'buildAndPush'
+#     Dockerfile: '**/dockerfile'
+#     tags: '$(version)'
+#     addPipelineData: false
+#     addBaseImageData: false
 
 
-- task: PowerShell@2
-  displayName: Set version and repository in files *.yaml
-  inputs:
-    targetType: 'inline'
-    script: |
-      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content deploy.yaml
-      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{repositoryImage}}', '$(repositoryImage)' | Set-Content deploy.yaml
-      (Get-Content deploy.yaml -Encoding UTF8) -replace '{{version}}', '$(version)' | Set-Content deploy.yaml
-      (Get-Content service.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content service.yaml
-      cat deploy.yaml
-      cat service.yaml
-    workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
+# - task: PowerShell@2
+#   displayName: Set version and repository in files *.yaml
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content deploy.yaml
+#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{repositoryImage}}', '$(repositoryImage)' | Set-Content deploy.yaml
+#       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{version}}', '$(version)' | Set-Content deploy.yaml
+#       (Get-Content service.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content service.yaml
+#       cat deploy.yaml
+#       cat service.yaml
+#     workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish to ArtifactStagingDirectory'
-  inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/devops/k8s'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish to ArtifactStagingDirectory'
+#   inputs:
+#     PathtoPublish: '$(Build.SourcesDirectory)/devops/k8s'
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
