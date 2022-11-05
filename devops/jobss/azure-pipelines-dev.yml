@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 variables:
-  repositoryImage: wlopezob
+  repositoryImage: wlopezobacr.azurecr.io
 trigger:
 - none
 
@@ -54,7 +54,7 @@ steps:
   displayName: Docker Build and push
   inputs:
     containerRegistry: 'dockerhub'
-    repository: '$(repositoryImage)/$(appName)'
+    repository: '$(appName)'
     command: 'buildAndPush'
     Dockerfile: '**/dockerfile'
     tags: '$(version)'
