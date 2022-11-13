@@ -11,10 +11,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /minetflix(/|$)(.*)
+      - path: /{{path}}(/|$)(.*)
         pathType: Prefix
         backend:
           service:
-            name: {{path}}
+            name: {{appName}}
             port:
               number: 80
