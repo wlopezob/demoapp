@@ -16,7 +16,7 @@ public class HelloWorldControllerTest {
   @Test
   @DisplayName("Getting Hello, World")
   public void HelloWorldTest(){
-    final String helloWorld = "Hello, World.";
+    final String helloWorld = "Hello, World. DEVOPS";
     Assertions.assertEquals(helloWorldController.HelloWorld(),helloWorld);
   }
 }
