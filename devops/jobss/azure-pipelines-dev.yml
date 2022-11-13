@@ -76,6 +76,7 @@ steps:
       (Get-Content ingress.yaml -Encoding UTF8) -replace '{{pathApp}}', '$(pathApp)' | Set-Content ingress.yaml
       cat deploy.yaml
       cat service.yaml
+      cat ingress.yaml
     workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
 
 - task: PublishBuildArtifacts@1
