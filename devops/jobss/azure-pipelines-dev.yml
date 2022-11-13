@@ -51,16 +51,16 @@ steps:
     checkStyleRunAnalysis: true
 
 
-# - task: Docker@2
-#   displayName: Docker Build and push
-#   inputs:
-#     containerRegistry: 'acr'
-#     repository: '$(appName)'
-#     command: 'buildAndPush'
-#     Dockerfile: '**/dockerfile'
-#     tags: '$(version)'
-#     addPipelineData: false
-#     addBaseImageData: false
+- task: Docker@2
+  displayName: Docker Build and push
+  inputs:
+    containerRegistry: 'acr'
+    repository: '$(appName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/dockerfile'
+    tags: '$(version)'
+    addPipelineData: false
+    addBaseImageData: false
 
 
 - task: PowerShell@2
