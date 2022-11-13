@@ -5,6 +5,7 @@
 
 variables:
   repositoryImage: wlopezobacr.azurecr.io
+  pathApp: appdemo-v1
 trigger:
 - none
 
@@ -50,16 +51,16 @@ steps:
     checkStyleRunAnalysis: true
 
 
-- task: Docker@2
-  displayName: Docker Build and push
-  inputs:
-    containerRegistry: 'acr'
-    repository: '$(appName)'
-    command: 'buildAndPush'
-    Dockerfile: '**/dockerfile'
-    tags: '$(version)'
-    addPipelineData: false
-    addBaseImageData: false
+# - task: Docker@2
+#   displayName: Docker Build and push
+#   inputs:
+#     containerRegistry: 'acr'
+#     repository: '$(appName)'
+#     command: 'buildAndPush'
+#     Dockerfile: '**/dockerfile'
+#     tags: '$(version)'
+#     addPipelineData: false
+#     addBaseImageData: false
 
 
 - task: PowerShell@2
@@ -71,6 +72,8 @@ steps:
       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{repositoryImage}}', '$(repositoryImage)' | Set-Content deploy.yaml
       (Get-Content deploy.yaml -Encoding UTF8) -replace '{{version}}', '$(version)' | Set-Content deploy.yaml
       (Get-Content service.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content service.yaml
+      (Get-Content ingress.yaml -Encoding UTF8) -replace '{{appName}}', '$(appName)' | Set-Content ingress.yaml
+      (Get-Content ingress.yaml -Encoding UTF8) -replace '{{pathApp}}', '$(pathApp)' | Set-Content ingress.yaml
       cat deploy.yaml
       cat service.yaml
     workingDirectory: '$(Build.SourcesDirectory)/devops/k8s'
