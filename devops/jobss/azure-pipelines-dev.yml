@@ -36,12 +36,17 @@ steps:
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.branch.name=main
     
 - task: Maven@3
   displayName: Clean Package
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package -Dsonar.branch.name=main'
+    goals: 'clean package'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     allowBrokenSymlinks: false
