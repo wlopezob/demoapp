@@ -42,7 +42,15 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.branch.name="$(Build.SourceBranchName)"
-    
+
+- task: PowerShell@2
+  displayName: Load sonar.branch.name
+  inputs:
+    targetType: 'inline'
+    script: |
+     $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w,/,-]*"\,?'
+     Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+
 - task: Maven@3
   displayName: Clean Package
   inputs:
