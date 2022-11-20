@@ -50,11 +50,10 @@ steps:
   displayName: Clean Package
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package -Dsonar.branch.name=$(Build.SourceBranchName)'
+    goals: 'test'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     allowBrokenSymlinks: false
-    codeCoverageToolOption: 'JaCoCo'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
@@ -62,7 +61,6 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
-    isJacocoCoverageReportXML: true
     sqMavenPluginVersionChoice: 'latest'
     checkStyleRunAnalysis: true
 
