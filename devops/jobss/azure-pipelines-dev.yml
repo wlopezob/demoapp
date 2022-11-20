@@ -33,6 +33,7 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: SonarQubePrepare@5
+  displayName: 'Prepare and analysis: $(Build.SourceBranchName)'
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'Other'
@@ -40,7 +41,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.branch.name="master"
+      sonar.branch.name="$(Build.SourceBranchName)"
     
 - task: Maven@3
   displayName: Clean Package
