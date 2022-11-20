@@ -50,7 +50,7 @@ steps:
   displayName: Clean Package
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package'
+    goals: 'clean package -Dsonar.branch.name=$(Build.SourceBranchName)'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     allowBrokenSymlinks: false
