@@ -46,7 +46,7 @@ steps:
   displayName: Clean Package
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'sonar:sonar'
+    goals: 'test sonar:sonar'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     allowBrokenSymlinks: false
