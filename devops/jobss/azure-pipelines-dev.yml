@@ -32,6 +32,12 @@ steps:
      Write-Host "##vso[task.setvariable variable=appName]$appName"
     workingDirectory: '$(Build.SourcesDirectory)'
 
+- task: SonarQubePrepare@5
+  displayName: SonarQube Prepare analysis Configuration
+  inputs:
+    SonarQube: 'sonarqube'
+    scannerMode: 'Other'
+
 - task: Maven@3
   displayName: Clean Package
   inputs:
@@ -47,8 +53,15 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
+    isJacocoCoverageReportXML: true
+    sqMavenPluginVersionChoice: 'latest'
     checkStyleRunAnalysis: true
+
+- task: SonarQubePublish@5
+  displayName: Publish SonarQube
+  inputs:
+    pollingTimeoutSec: '300'
 
 
 - task: Docker@2
