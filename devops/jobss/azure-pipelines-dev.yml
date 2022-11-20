@@ -44,8 +44,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=$(Build.appNameSonarQube)
-      sonar.projectName=$(Build.appNameSonarQube)
+      sonar.projectKey='$(appNameSonarQube)'
+      sonar.projectName='$(appNameSonarQube)'
 
 - task: Maven@3
   displayName: Clean Package
