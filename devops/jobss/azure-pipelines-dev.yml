@@ -13,12 +13,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- checkout: self
-  persistCredentials: true
-- script: |
-    git checkout $(Build.SourceBranchName)
-    git push origin HEAD:master HEAD:main
-  displayName: Mirror old and new default branches
 
 - task: PowerShell@2
   displayName: Load vars
@@ -42,12 +36,18 @@ steps:
   displayName: 'Prepare and analysis: main'
   inputs:
     SonarQube: 'sonarqube'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '$appName'
+    cliProjectName: '$appName'
+    cliSources: '.'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.branch.name="main"
+      sonar.java.binaries= build/classes
+      sonar.java.binaries= build/libs
+      sonar.branch.name=$(Build.SourceBranchName)
 
 
 
