@@ -38,8 +38,8 @@ steps:
     SonarQube: 'sonarqube'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: '$appName'
-    cliProjectName: '$appName'
+    cliProjectKey: '$(Build.Repository.Name)'
+    cliProjectName: '$(Build.Repository.Name)'
     cliSources: '.'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
