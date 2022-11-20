@@ -33,11 +33,10 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: SonarQubePrepare@5
-  displayName: SonarQube Prepare analysis Configuration
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'Other'
-
+    
 - task: Maven@3
   displayName: Clean Package
   inputs:
