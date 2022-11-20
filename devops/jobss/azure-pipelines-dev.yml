@@ -46,7 +46,7 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=$(appNameSonarQube)
       sonar.projectName=$(appNameSonarQube)
-      sonar.exclusions= **/*Application.java
+      sonar.coverage.exclusions= **/*Application.java
 
 - task: Maven@3
   displayName: Clean Package
