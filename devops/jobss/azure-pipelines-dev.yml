@@ -24,12 +24,15 @@ steps:
      $version=$pomXml.project.version
      $artifactId=$pomXml.project.artifactId
      $appName=$artifactId + "-v"+$version.Split(".")[0]
+     $appNameSonarQube= $appName.Replace('-','.')
      Write-Host $version
      Write-Host $artifactId
      Write-Host $appName
+     Write-Host $appNameSonarQube
      Write-Host "##vso[task.setvariable variable=version]$version"
      Write-Host "##vso[task.setvariable variable=artifactId]$artifactId"
      Write-Host "##vso[task.setvariable variable=appName]$appName"
+     Write-Host "##vso[task.setvariable variable=appNameSonarQube]$appNameSonarQube"
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: SonarQubePrepare@5
@@ -41,6 +44,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
+      sonar.projectKey=$(Build.appNameSonarQube)
+      sonar.projectName=$(Build.appNameSonarQube)
 
 - task: Maven@3
   displayName: Clean Package
@@ -61,24 +66,6 @@ steps:
     isJacocoCoverageReportXML: true
     sqMavenPluginVersionChoice: 'pom'
     checkStyleRunAnalysis: true
-
-
-# - task: Maven@3
-#   displayName: Clean Package
-#   inputs:
-#     mavenPomFile: 'pom.xml'
-#     goals: 'test'
-#     publishJUnitResults: true
-#     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-#     allowBrokenSymlinks: false
-#     javaHomeOption: 'JDKVersion'
-#     jdkVersionOption: '1.11'
-#     mavenVersionOption: 'Default'
-#     mavenOptions: '-Xmx3072m'
-#     mavenAuthenticateFeed: false
-#     effectivePomSkip: false
-#     sonarQubeRunAnalysis: false
-#     checkStyleRunAnalysis: true
 
 
 
