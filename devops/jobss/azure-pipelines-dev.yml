@@ -36,7 +36,7 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: SonarQubePrepare@5
-  displayName: 'Prepare and analysis: main'
+  displayName: 'Prepare and analysis sonarqube'
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'Other'
@@ -67,8 +67,6 @@ steps:
     isJacocoCoverageReportXML: true
     sqMavenPluginVersionChoice: 'pom'
     checkStyleRunAnalysis: true
-
-
 
 - task: SonarQubePublish@5
   displayName: Publish SonarQube
