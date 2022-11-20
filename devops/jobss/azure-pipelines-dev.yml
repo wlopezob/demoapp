@@ -43,7 +43,7 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.java.binaries= build/classes
       sonar.java.binaries= build/libs
-      sonar.branch.name=$(Build.SourceBranchName)
+      sonar.branch.name="refs/heads/master"
 
 
 - task: Maven@3
