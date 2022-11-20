@@ -43,6 +43,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean package'
+    options: '-Dsonar.branch.name=main'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     allowBrokenSymlinks: false
