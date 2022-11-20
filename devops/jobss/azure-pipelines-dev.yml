@@ -46,8 +46,6 @@ steps:
       sonar.branch.name=$(Build.SourceBranchName)
 
 
-- task: SonarQubeAnalyze@5
-
 - task: Maven@3
   displayName: Clean Package
   inputs:
@@ -63,7 +61,9 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
+    isJacocoCoverageReportXML: true
+    sqMavenPluginVersionChoice: 'latest'
     checkStyleRunAnalysis: true
 
 
