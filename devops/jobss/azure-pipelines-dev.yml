@@ -7,7 +7,7 @@ variables:
   repositoryImage: wlopezobacr.azurecr.io
   pathApp: appdemo-v1
 trigger:
-- none
+- master
 
 pool:
   vmImage: ubuntu-latest
