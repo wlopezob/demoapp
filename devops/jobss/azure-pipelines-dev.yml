@@ -38,7 +38,7 @@ steps:
 - task: SonarQubePrepare@5
   displayName: 'Prepare and analysis sonarqube'
   inputs:
-    SonarQube: 'sonarqube'
+    SonarQube: 'sonar'
     scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
