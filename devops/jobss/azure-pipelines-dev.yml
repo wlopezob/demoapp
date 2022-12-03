@@ -73,10 +73,10 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-# - task: sonar-buildbreaker@8
-#   displayName: Validation quality gate
-#   inputs:
-#     SonarQube: 'sonarqube'
+- task: sonar-buildbreaker@8
+  displayName: Validation quality gate
+  inputs:
+    SonarQube: 'sonarqube'
 
 - task: Docker@2
   displayName: Docker Build and push
